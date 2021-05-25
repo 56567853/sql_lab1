@@ -20,27 +20,27 @@ Production.ProductModel AS PM
 ON PP.ProductModelID=PM.ProductModelID;
 
 --4.Показать список продуктов (ProductID), которые имеют несколько причин списания (ScrapReasonID), из таблицы Production.WorkOrder, используя SELF JOIN.
-SELECT DISTINCT W1.ProductID, W1.ScrapReasonID
-FROM Production.WorkOrder AS W1
-INNER JOIN Production.WorkOrder AS W2
-ON W1.ProductID=W2.ProductID
-AND W1.ScrapReasonID<>W2.ScrapReasonID
-ORDER BY W1.ProductID;
+SELECT DISTINCT PW1.ProductID, PW1.ScrapReasonID
+FROM Production.WorkOrder AS PW1
+INNER JOIN Production.WorkOrder AS PW2
+ON PW1.ProductID=PW2.ProductID
+AND PW1.ScrapReasonID<>PW2.ScrapReasonID
+ORDER BY PW1.ProductID;
 
 --5.Показать список причин списания (ScrapReasonID), которые имеют несколько продуктов (ProductID), из таблицы Production.WorkOrder, используя SELF JOIN.
-SELECT DISTINCT W1.ProductID, W1.ScrapReasonID
-FROM Production.WorkOrder AS W1
-INNER JOIN Production.WorkOrder AS W2
-ON W1.ScrapReasonID=W2.ScrapReasonID
-AND W1.ProductID<>W2.ProductID
-ORDER BY W1.ScrapReasonID;
+SELECT DISTINCT PW1.ProductID, PW1.ScrapReasonID
+FROM Production.WorkOrder AS PW1
+INNER JOIN Production.WorkOrder AS PW2
+ON PW1.ScrapReasonID=PW2.ScrapReasonID
+AND PW1.ProductID<>PW2.ProductID
+ORDER BY PW1.ScrapReasonID;
 
 --6.Показать список товаров из таблицы Production.Product, которые имеют такой же размер как у товара с названием Mountain Bike Socks, M, используя SELF JOIN.
-SELECT DISTINCT P1.Name, P1.Size
-FROM Production.Product AS P1
-INNER JOIN Production.Product AS P2
-ON P1.Size=P2.Size
-AND P2.Name='Mountain Bike Socks, M';
+SELECT DISTINCT PP1.Name, PP1.Size
+FROM Production.Product AS PP1
+INNER JOIN Production.Product AS PP2
+ON PP1.Size=PP2.Size
+AND PP2.Name='Mountain Bike Socks, M';
 
 --7.Показать комбинированный список таблиц Production.Product по полям ProductID, ListPrice, Purchasing.ProductVendor по полям ProductID, StandardPrice, используя UNION.
 SELECT ProductID, ListPrice
